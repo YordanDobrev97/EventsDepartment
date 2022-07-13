@@ -47,9 +47,7 @@ const SignIn = () => {
                 fullName: res.fullName
             }))
 
-            setTimeout(() => {
-                navigation("/dashboard")
-            }, 5000)
+            navigation("/dashboard")
         }
         
     }

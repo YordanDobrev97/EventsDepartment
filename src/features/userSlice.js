@@ -11,7 +11,7 @@ const userSlice = createSlice({
     setUser: (state, action) => {
         state.fullName = action.payload.fullName
     },
-    logOut: state => {
+    logOut: (state, action) => {
         state.fullName = null
     }
   }

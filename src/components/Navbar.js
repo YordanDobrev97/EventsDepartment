@@ -1,12 +1,17 @@
-import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom";
+import { logOut } from "../features/userSlice";
 import "../styles/navbar.css";
 
 const Navbar = () => {
+    const navigation = useNavigate();
+    const dispatch = useDispatch();
     const user = useSelector((state) => state.user);
     
-    const logOut = () => {
-        
+    const logout = () => {
+        dispatch(logOut());
+        navigation("/")
     }
 
     return (
@@ -21,7 +26,7 @@ const Navbar = () => {
                                     Hello, {user.fullName}
                                 </li>
                                 <li>
-                                    <button onClick={logOut}>LogOut</button>
+                                    <button onClick={logout}>LogOut</button>
                                 </li>
                             </>
                         ) : (

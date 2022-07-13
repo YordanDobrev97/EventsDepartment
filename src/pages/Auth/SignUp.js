@@ -49,9 +49,7 @@ const SignUp = () => {
                 fullName: fullName
             }))
 
-            setTimeout(() => {
-                navigation("/sign-in")
-            }, 5000)
+            navigation("/sign-in")
         }
         
     }
