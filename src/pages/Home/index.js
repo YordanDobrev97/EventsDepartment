@@ -7,7 +7,7 @@ const Home = () => {
                 <h1 className="">Welcome to Event Department Solution</h1>
                 <p>Manage your department events</p>
 
-                <img src="https://spotme.com/wp-content/uploads/2021/07/Event-Planning-Tips-the-Pros-Are-Leaning-on-in-2021-Hero.png"/>
+                <img src="https://static.wixstatic.com/media/c699f7_713927d33bdb43dfa53a95358cf23dc2~mv2.png/v1/fit/w_2500,h_1330,al_c/c699f7_713927d33bdb43dfa53a95358cf23dc2~mv2.png"/>
             </section>
         </div>
     )

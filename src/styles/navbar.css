@@ -2,3 +2,14 @@
 .nav {
     background-color: #314C5F !important;
 }
+
+li {
+    margin: 0 14px;
+}
+
+li > button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
