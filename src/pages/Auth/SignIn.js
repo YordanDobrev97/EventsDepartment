@@ -47,9 +47,8 @@ const SignIn = () => {
                 fullName: res.fullName
             }))
 
-            navigation("/dashboard")
+            navigation("/dashboard/home")
         }
-        
     }
 
     return (
@@ -57,7 +56,6 @@ const SignIn = () => {
             <ToastContainer />
             <div className="row card-content center">
                 <form className="col s12" onSubmit={submit}>
-                    
                     <div className="row col s4 offset-s4">
                         <div className="input-field col s12">
                             <input

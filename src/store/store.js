@@ -7,7 +7,6 @@ export const store =  configureStore({
     }
 })
 
-export const appState = store.getState()
-export const appDispatch = store.dispatch
+export const appState = store.getState;
 
 export default store;

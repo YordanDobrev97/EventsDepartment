@@ -1,20 +1,19 @@
 import firebase from "../firebase"
 
-const DEFAULT_PASSWORD = "DEFAULT_PASSWORD"; // 
+const DEFAULT_PASSWORD = "DEFAULT_PASSWORD";
 
 const signUp = async (data) => {
     const { fullName, email, phoneNumber } = data;
     try {
-        // register user with email
+        // register user with email and default password
         const res = await firebase.auth.createUserWithEmailAndPassword(email, DEFAULT_PASSWORD);
 
-        // add new user to users collection with fullName and phone
+        // Create a User collection in which I keep the full name and telephone number of the user so that I can avoid 2-factor authentication with firebase phone verify
         const user = await firebase.firestore.collection("users").add({
             fullName,
             email,
             phoneNumber
         })
-        console.log(user)
     } catch (e) {
         return e.message;
     }
@@ -25,12 +24,9 @@ const signIn = async (data) => {
 
     try {
         await firebase.auth.signInWithEmailAndPassword(email, DEFAULT_PASSWORD);
-        
         const user = await (await firebase.firestore.collection("users").where("email", "==", email).get()).docs.map((u) => u.data());
-        console.log(user[0])
         return user[0];
     } catch (e) {
-
         return e.message;
     }
 }

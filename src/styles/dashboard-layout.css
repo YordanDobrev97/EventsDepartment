@@ -1,0 +1,57 @@
+
+.dashboard-layout {
+    display: flex;
+}
+
+.side-nav {
+    width: 20%;
+    background-color: #3E3850;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    text-align: center;
+    color: white;
+}
+
+.side-nav li {
+    font-size: 28px;
+}
+
+.menu-icon {
+    font-size: 18px;
+    margin: 0 8px;
+}
+
+.side-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    width: 50%;
+    margin: auto;
+}
+
+.side-item {
+    margin-bottom: 10px;
+}
+
+.side-item:hover {
+    background-color: rgb(203, 203, 201);
+    width: 100%;
+    opacity: 0.8;
+}
+
+.side-logout-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 23px;
+    display: flex;
+    align-items: center;
+    margin: 35px auto;
+    border-top: 2.5px solid white;
+    cursor: pointer;
+}
+
+.side-logout-btn:hover {
+    background-color: #5f5874;
+}

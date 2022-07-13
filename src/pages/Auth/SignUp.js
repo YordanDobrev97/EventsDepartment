@@ -37,8 +37,6 @@ const SignUp = () => {
         e.preventDefault();
         
         const res = await AuthService.signUp(formData);
-        console.log(res)
-        
         if (res === EXIST_USER) {
             //message for exist user
             toast.error(res);
@@ -51,7 +49,6 @@ const SignUp = () => {
 
             navigation("/sign-in")
         }
-        
     }
 
     return (
