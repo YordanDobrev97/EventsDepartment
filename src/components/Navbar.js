@@ -5,9 +5,9 @@ const Navbar = () => {
     return (
         <>
             <nav className="nav">
-                <div class="nav-wrapper">
-                    <a href="#!" class="brand-logo">Event Department</a>
-                    <ul class="right hide-on-med-and-down">
+                <div className="nav-wrapper">
+                    <Link to="/" className="brand-logo">Event Department</Link>
+                    <ul className="right hide-on-med-and-down">
                         <li>
                             <Link to="/sign-in">Sign In</Link>
                         </li>

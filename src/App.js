@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Layout from './pages/Layout';
 import HomePage from "./pages/Home";
+import SignUp from "./pages/Auth/SignUp";
+
 import Navbar from "./components/Navbar";
 
 function App() {
@@ -13,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<HomePage />}/>
+            <Route path="sign-up" element={<SignUp />}/>
           </Route>
         </Routes>
       </Router>
