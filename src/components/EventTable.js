@@ -1,6 +1,17 @@
-
+import { useState, useEffect } from "react";
+import eventService from "../services/event";
 
 const EventTable = () => {
+    const [events, setEvents] = useState([])
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            const response = await eventService.getAll();
+            setEvents(response)
+        }
+        fetchEvents();
+    }, [])
+
     return (
         <div className="row event-table">
             <h3 className="center">Events</h3>
@@ -16,24 +27,20 @@ const EventTable = () => {
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td>React</td>
-                        <td>Build react.js application</td>
-                        <td>12.07.22</td>
-                        <td>
-                            <button className="waves-effect waves-light btn-small join-btn">Join</button>
-                            <button className="waves-effect waves-light btn-small details-btn">Details</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Angular</td>
-                        <td>Build Angular application</td>
-                        <td>13.07.22</td>
-                        <td>
-                            <button className="waves-effect waves-light btn-small join-btn">Join</button>
-                            <button className="waves-effect waves-light btn-small details-btn">Details</button>
-                        </td>
-                    </tr>
+                    {events && events.map((e) => {
+                        console.log(e)
+                        return (
+                            <tr>
+                                <td>{e.name}</td>
+                                <td>{e.description}</td>
+                                <td>{e.date}</td>
+                                <td>
+                                    <button className="waves-effect waves-light btn-small join-btn">Join</button>
+                                    <button className="waves-effect waves-light btn-small details-btn">Details</button>
+                                </td>
+                            </tr>
+                        )
+                    })}
                 </tbody>
 
                 <tfoot>

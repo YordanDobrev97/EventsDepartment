@@ -1,60 +1,123 @@
+import { useNavigate } from "react-router-dom";
+import { Form, Field } from "react-final-form";
+import eventService from "../../services/event";
 
+import { ToastContainer, toast } from "react-toastify";
 
 const NewEvent = () => {
+    const navigation = useNavigate();
+
+    const submit = async (data) => {
+        try {
+            const response = await eventService.newEvent(data);
+            if (response) {
+                navigation("/dashboard/home");
+            }
+        } catch (error) {
+            toast.error("Your event has not been created. Please, try again later!");
+        }
+    }
+
     return (
-        <div class="row">
-            <h2>Create new event</h2>
-            <form class="col s12">
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input placeholder="Event name" id="first_name" type="text" class="validate" />
-                    </div>
-                </div>
-                <div className="row">
-                    <div class="input-field col s12">
-                        <input placeholder="Event description" id="Description event" type="text" class="validate" />
-                    </div>
-                </div>
+        <Form
+            onSubmit={submit}
+            initialValues={{}}
+            render={({ handleSubmit }) => {
+                return (
+                    <div className="row">
+                        <h2>Create new event</h2>
+                        <ToastContainer />
+                        <form className="col s12" onSubmit={handleSubmit}>
+                            <div className="row">
+                                <div className="input-field col s12">
+                                    <Field name="name">
+                                        {({ input }) => {
+                                            return (
+                                                <input {...input} placeholder="Event name" id="name" type="text" className="validate" />
+                                            )
+                                        }}
+                                    </Field>
+                                </div>
+                            </div>
 
-                <div className="row">
-                    <div class="col s12">
-                        <label>Event category</label>
-                        <select className="event-select">
-                            <option value="" disabled selected>Choose event category</option>
-                            <option value="education">Education</option>
-                            <option value="carrers">Carrers</option>
-                            <option value="entertainment">Entertainment</option>
-                        </select>
-                    </div>
-                </div>
+                            <div className="row">
+                                <div className="input-field col s12">
+                                    <Field name="description">
+                                        {({ input }) => {
+                                            return (
+                                                <input {...input} placeholder="Description" id="description" type="text" className="validate" />
+                                            )
+                                        }}
+                                    </Field>
+                                </div>
+                            </div>
 
-               <div className="row">
-               <p>
-                    <label>
-                        <input type="checkbox" className="filled-in" />
-                        <span>Free event</span>
-                    </label>
-                </p>
-               </div>
+                            <div className="row">
+                                <div className="col s12">
+                                    <label>Event category</label>
+                                    <Field name="category" component="select" className="event-select">
+                                        <option value="" disabled>Choose event category</option>
+                                        <option value="education">Education</option>
+                                        <option value="carrers">Carrers</option>
+                                        <option value="entertainment">Entertainment</option>
+                                    </Field>
+                                </div>
+                            </div>
 
-                <div className="row">
-                    <div className="col s12">
-                        <label>Event Date</label>
-                        <input type="date" className="datepicker" />
-                    </div>
-                </div>
+                            <div className="row" style={{
+                                padding: "12px",
+                                fontSize: "22px",
+                                display: "flex",
+                            }}>
+                                <Field name="isFree">
+                                    {({ input }) => {
+                                        return (
+                                            <>
+                                                <label style={{ fontSize: "22px" }}>Free Event</label>
+                                                <input style={{
+                                                        opacity: 1,
+                                                        pointerEvents: "auto",
+                                                        width: "60px",
+                                                        margin: "5px",
+                                                        position: "relative",
+                                                        height: "25px",
+                                                }} {...input} type="checkbox" />
+                                            </>
+                                        )
+                                    }}
+                                </Field>
+                            </div>
 
-                <div className="row">
-                    <div className="col s12">
-                        <button
-                            className="btn waves-effect waves-teal"
-                            style={{ width: "100%" }}>
-                            Add
-                        </button>
+                            <div className="row">
+                                <div className="col s12">
+                                    <Field name="date">
+                                        {({ input }) => {
+                                            return (
+                                                <>
+                                                    <label>Event Date</label>
+                                                    <input {...input} type="date" className="datepicker" />
+                                                </>
+                                            )
+                                        }}
+                                    </Field>
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col s12">
+                                    <button
+                                        className="btn waves-effect waves-teal"
+                                        style={{ width: "100%" }}>
+                                        Add
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </div>
-            </form>
-        </div>
+                )
+            }}
+        >
+        </Form>
     )
 }
 
