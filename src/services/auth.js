@@ -19,9 +19,7 @@ const signUp = async (data) => {
     }
 }
 
-const signIn = async (data) => {
-    const { email } = data;
-
+const signIn = async (email) => {
     try {
         await firebase.auth.signInWithEmailAndPassword(email, DEFAULT_PASSWORD);
         const user = await (await firebase.firestore.collection("users").where("email", "==", email).get()).docs.map((u) => u.data());

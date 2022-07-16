@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import EventTable from "../../components/EventTable";
 import { appState } from "../../store/store";
 
@@ -7,7 +8,7 @@ const Dashboard = () => {
         <div className="row">
             <h1>Welcome, {user.fullName}</h1>
 
-            <button className="waves-effect waves-light btn">New Event</button>
+            <Link to="/dashboard/new-event" className="waves-effect waves-light btn">New Event</Link>
 
             <EventTable />
         </div>

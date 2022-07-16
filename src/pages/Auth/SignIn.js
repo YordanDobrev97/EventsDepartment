@@ -1,6 +1,7 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux"
+import { Form, Field } from 'react-final-form';
+
 import AuthService from "../../services/auth";
 import { setUser } from "../../features/userSlice";
 import { injectStyle } from "react-toastify/dist/inject-style";
@@ -17,26 +18,11 @@ if (typeof window !== "undefined") {
 const SignIn = () => {
     const navigation = useNavigate();
     const dispatch = useDispatch()
-    
-    const [formData, setData] = useState({
-        email: '',
-    })
 
-    const { email } = formData;
-    
-    const onChange = (e) => {
-        setData((prevValue) => ({
-            ...prevValue,
-            [e.target.name]: e.target.value
-        }))
-    }
-
-    const submit = async (e) => {
-        e.preventDefault();
-        
-        const res = await AuthService.signIn(formData);
+    const submit = async ({email}) => {
+        const res = await AuthService.signIn(email);
         console.log(res)
-        
+
         if (res === WRONG_EMAIL) {
             //message for wrong email
             toast.error(res);
@@ -53,27 +39,49 @@ const SignIn = () => {
 
     return (
         <>
-            <ToastContainer />
-            <div className="row card-content center">
-                <form className="col s12" onSubmit={submit}>
-                    <div className="row col s4 offset-s4">
-                        <div className="input-field col s12">
-                            <input
-                                placeholder="Email" 
-                                id="email"
-                                name="email"
-                                type="text"
-                                value={email}
-                                onChange={onChange}
-                            />
-                        </div>
-                    </div>
+            <Form
+                onSubmit={submit}
+                initialValues={{email: ''}}
+                render={({ handleSubmit }) => {
+                    return (
+                        <>
+                            <ToastContainer />
+                            <div className="row card-content center">
+                                <form className="col s12" onSubmit={handleSubmit}>
+                                    <div className="row col s4 offset-s4">
+                                        <div className="input-field col s12">
+                                            <Field
+                                                name="email"
+                                                component="input"
+                                                type="text"
+                                                placeholder="Email">
+                                                {({ input, meta }) => {
+                                                    return (
+                                                        <>
+                                                            <input
+                                                            {...input}
+                                                            placeholder="Email"
+                                                            id="email"
+                                                            type="text"
+                                                        />
+                                                        {meta.error && meta.touched && <span>{meta.error}</span>}
+                                                        </>
+                                                    )
+                                                }}
+                                            </Field>
+                                        </div>
+                                    </div>
 
-                    <div className="row col s4 offset-s4">
-                        <button className="waves-effect waves-light btn">Sign In</button>
-                    </div>
-                </form>
-            </div>
+                                    <div className="row col s4 offset-s4">
+                                        <button className="waves-effect waves-light btn">Sign In</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </>
+                    )
+                }}
+            >
+            </Form>
         </>
     )
 }

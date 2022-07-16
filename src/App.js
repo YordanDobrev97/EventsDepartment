@@ -9,6 +9,8 @@ import SignIn from "./pages/Auth/SignIn";
 import Dashboard from "./pages/Dashboard";
 import DashboardLayout from "./components/DashboardLayout";
 
+import NewEvent from "./pages/Dashboard/NewEvent";
+
 function App() {
   return (
     <div className="App">
@@ -23,6 +25,8 @@ function App() {
 
           <Route path="dashboard" element={<DashboardLayout />}>
               <Route path="home" element={<Dashboard />} />
+
+              <Route path="new-event" element={<NewEvent />}/>
             </Route>
         </Routes>
       </Router>
