@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import DashboardLayout from "./components/DashboardLayout";
 
 import NewEvent from "./pages/Dashboard/NewEvent";
+import EventDetails from "./pages/Dashboard/EventDetails";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
               <Route path="home" element={<Dashboard />} />
 
               <Route path="new-event" element={<NewEvent />}/>
+              <Route path="event/:id" element={<EventDetails />}/>
             </Route>
         </Routes>
       </Router>

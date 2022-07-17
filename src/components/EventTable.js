@@ -1,21 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import eventService from "../services/event";
+import { appState } from "../store/store";
+
+import { ToastContainer, toast } from "react-toastify";
 
 const EventTable = () => {
     const [events, setEvents] = useState([])
+    const { user: { fullName } } = appState()
 
     useEffect(() => {
         const fetchEvents = async () => {
             const response = await eventService.getAll();
+            console.log(response)
             setEvents(response)
         }
         fetchEvents();
     }, [])
 
+    const joinToEvent = async (eventId) => {
+        
+        await eventService.joinParticipant(fullName, eventId);
+        toast.success("You have successfully joined the event");
+    }
+
     return (
         <div className="row event-table">
             <h3 className="center">Events</h3>
 
+            <ToastContainer />
             <table className="highlight centered responsive-table">
                 <thead>
                     <tr>
@@ -28,15 +41,16 @@ const EventTable = () => {
 
                 <tbody>
                     {events && events.map((e) => {
-                        console.log(e)
                         return (
                             <tr>
                                 <td>{e.name}</td>
                                 <td>{e.description}</td>
                                 <td>{e.date}</td>
                                 <td>
-                                    <button className="waves-effect waves-light btn-small join-btn">Join</button>
-                                    <button className="waves-effect waves-light btn-small details-btn">Details</button>
+                                    <button onClick={() => joinToEvent(e.id)} className="waves-effect waves-light btn-small join-btn">
+                                        {e.participants.includes(fullName) ? "Joined": "Join" }
+                                    </button>
+                                    <Link to={`/dashboard/event/${e.id}`} className="waves-effect waves-light btn-small details-btn">Details</Link>
                                 </td>
                             </tr>
                         )
