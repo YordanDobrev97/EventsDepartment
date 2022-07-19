@@ -4,6 +4,7 @@ import { appState } from "../../store/store";
 
 const Dashboard = () => {
     const { user } = appState();
+
     return (
         <div className="row">
             <h1>Welcome, {user.fullName}</h1>

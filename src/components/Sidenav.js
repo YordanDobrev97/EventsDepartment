@@ -23,26 +23,6 @@ const Sidenav = () => {
                             Home
                         </Link>
                     </li>
-                    <li className="side-item">
-                        <FaCircle className="menu-icon" />
-                        All
-                    </li>
-                    <li className="side-item">
-                        <FaCircle className="menu-icon" style={{ color: "#64D0C9" }} />
-                        Free
-                    </li>
-                    <li className="side-item">
-                        <FaCircle className="menu-icon" style={{ color: "#819ED6" }} />
-                        Paid
-                    </li>
-                    <li className="side-item">
-                        <FaCircle className="menu-icon" style={{ color: "#819ED6" }} />
-                        Online
-                    </li>
-                    <li className="side-item">
-                        <FaCircle className="menu-icon" style={{ color: "#EA8520" }} />
-                        Offline
-                    </li>
                 </ul>
 
                 <button onClick={logout} className="side-logout-btn">

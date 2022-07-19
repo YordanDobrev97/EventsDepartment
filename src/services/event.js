@@ -28,9 +28,20 @@ const joinParticipant = async (user, eventId) => {
     });
 }
 
+const leaveEvent = async (user, eventId) => {
+    const event = await firebase.firestore.collection('events').doc(eventId)
+    const data = {...await (await event.get()).data()}
+    data.participants = data.participants.filter((u) => u !== user)
+
+    await event.update({
+        participants: data.participants
+    });
+}
+
 export default {
     newEvent,
     getAll,
     getById,
-    joinParticipant
+    joinParticipant,
+    leaveEvent
 }

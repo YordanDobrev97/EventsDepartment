@@ -4,7 +4,6 @@ import { BsCalendarDate } from "react-icons/bs";
 import { MdViewModule } from "react-icons/md";
 
 import EventParticipants from "../../components/EventParticipants";
-
 import eventService from "../../services/event";
 
 const styles = {
@@ -16,9 +15,10 @@ const styles = {
     description: {
         fontSize: "24px"
     },
-    card: {
-        position: "absolute",
-        left: "35%"
+    row: {
+        margin: "0 10px",
+        display: "flex",
+        alignItems: "center"
     },
     date: {
         display: "flex",
@@ -52,8 +52,10 @@ const styles = {
         fontSize: 20
     },
     container: {
-        background: "#235291",
-        boxShadow: "1px 4px 7px 8px rgb(2 0 0 / 38%)"
+        background: "#292c2fa1",
+        boxShadow: "1px 4px 7px 8px rgb(2 0 0 / 38%)",
+        borderRadius: "21px",
+        width: "45em"
     }
 }
 const EventDetails = () => {
@@ -75,8 +77,8 @@ const EventDetails = () => {
 
     return (
         <>
-            <div class="row">
-                <div class="col s12 m6" style={styles.card}>
+            <div class="row" style={styles.row}>
+                <div class="col" style={styles.card}>
                     <div class="card darken-1" style={styles.container}>
                         <div class="card-content white-text center">
                             <span class="card-title" style={styles.title}>{event.name}</span>
@@ -99,12 +101,9 @@ const EventDetails = () => {
                             <button style={styles.button}>{event.isFree ? "FREE" : "PAID"}</button>
                         </div>
                     </div>
-
-                    <div>
-                        <EventParticipants participants={event.participants}/>
-                    </div>
                 </div>
 
+                <EventParticipants participants={event.participants} />
             </div>
         </>
     )

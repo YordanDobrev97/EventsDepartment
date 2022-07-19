@@ -1,5 +1,3 @@
-
-
 const styles = {
     participant: {
         display: "flex",
@@ -16,6 +14,7 @@ const styles = {
         fontSize: 20,
     }
 }
+
 const Participant = ({ name }) => {
     return (
         <div style={styles.participant}>
